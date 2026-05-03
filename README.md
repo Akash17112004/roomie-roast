@@ -303,6 +303,7 @@ Provider State Management
 Real-time UI Updates
    ↓
 Charts + Roast Messages + Rankings
+```
 📂 Project Structure
 lib/
 │
@@ -332,6 +333,7 @@ lib/
 │
 ├── widgets/
 └── theme/
+---
 🔥 Firebase Collections
 users/
 rooms/
@@ -340,30 +342,58 @@ expenses/
 complaints/
 borrowed/
 scores/
+---
 📸 Screenshots
 Authentication
-Login Screen
+<img width="1364" height="631" alt="Screenshot 2026-05-03 235202" src="https://github.com/user-attachments/assets/78ed1942-e2fc-4890-a6f6-79afc32a5c80" />
+
 Signup Screen
+<img width="1365" height="626" alt="Screenshot 2026-05-04 000036" src="https://github.com/user-attachments/assets/86c1c79a-d8bb-4590-bfd6-c9585043b9c3" />
+
 Home
-Chore Board
-Roast Banner
-Streak Rewards
+<img width="1365" height="632" alt="Screenshot 2026-05-03 235307" src="https://github.com/user-attachments/assets/f11f1cae-ab90-4f36-b9e7-c31eeb8df2fa" />
+
 Dashboard
+<img width="1365" height="631" alt="Screenshot 2026-05-03 235359" src="https://github.com/user-attachments/assets/50c21263-1dce-4580-85ce-ac5e1aa84375" />
+
+Roast Banner
+<img width="1365" height="283" alt="image" src="https://github.com/user-attachments/assets/9bcfffe3-efde-4a66-b5ba-a5ea423d8717" />
+
 Charts
+<img width="1365" height="420" alt="Screenshot 2026-05-03 235915" src="https://github.com/user-attachments/assets/94bc9520-b93e-4e1e-9ee8-4c46e1372ffb" />
+<img width="1365" height="623" alt="Screenshot 2026-05-04 000007" src="https://github.com/user-attachments/assets/b4a73068-02b0-41aa-9b5e-471bf4a5f2a2" />
+
+
+
 Mood Meter
+<img width="1363" height="189" alt="Screenshot 2026-05-03 235559" src="https://github.com/user-attachments/assets/1f75cd7f-5ca7-481f-88d5-c06f1124be16" />
+
 Expense Splitter
-Bills
-Due Summary
+<img width="1365" height="631" alt="image" src="https://github.com/user-attachments/assets/0254d5e0-a7de-45cd-8dba-792030bd6614" />
+
 Drama Center
+<img width="1365" height="630" alt="Screenshot 2026-05-03 235719" src="https://github.com/user-attachments/assets/e5b955b0-09d1-4f9f-a554-384d5051dbd7" />
+
 Complaints
+<img width="1365" height="336" alt="Screenshot 2026-05-04 000242" src="https://github.com/user-attachments/assets/db28b4fb-82f8-480b-a983-16d86dd15688" />
+
 Borrow Tracker
+<img width="1365" height="604" alt="Screenshot 2026-05-04 000258" src="https://github.com/user-attachments/assets/764da34d-6360-49e1-80e6-229684ae0a66" />
+
 Punishment Wheel
+<img width="1365" height="274" alt="Screenshot 2026-05-04 000232" src="https://github.com/user-attachments/assets/2ba11020-cace-4ca0-8479-5fcbb4147cfb" />
+
 Fairness Engine
+<img width="1365" height="638" alt="Screenshot 2026-05-03 235834" src="https://github.com/user-attachments/assets/1213d3d8-72c1-42b3-b909-464d86807514" />
+
 Rankings
+<img width="1365" height="631" alt="Screenshot 2026-05-03 235647" src="https://github.com/user-attachments/assets/bb8c3a80-704a-46ad-bacb-0a67db95689f" />
+
 Weekly Duties
 
-(Add screenshots in assets folder)
 
+(Add screenshots in assets folder)
+---
 ⚙️ Installation Guide
 1️⃣ Clone Repository
 git clone https://github.com/Akash17112004/roomie-roast.git
@@ -378,6 +408,7 @@ google-services.json (Android)
 GoogleService-Info.plist (iOS)
 4️⃣ Run App
 flutter run
+---
 🧪 Testing Completed
 
 ✅ Login / Signup
@@ -390,7 +421,7 @@ flutter run
 ✅ Notifications
 ✅ Empty States
 ✅ Error Handling
-
+---
 🎯 Why This Project Stands Out
 
 Unlike basic student CRUD apps, Roomie Roast combines:
@@ -408,6 +439,7 @@ Gamification
 Social interactions
 Design Value
 Premium UI
+---
 🚀 Future Improvements
 AI Chatbot mediator 🤖
 Voice complaints 🎤
@@ -416,6 +448,7 @@ Push notifications
 Leaderboard history
 Monthly reports
 Multi-language support
+---
 👨‍💻 Developer
 Akash Tomar
 
@@ -423,7 +456,7 @@ B.Tech CSE (Full Stack Development)
 The NorthCap University
 
 GitHub: https://github.com/Akash17112004
-
+---
 ⭐ Support
 
 If you liked this project:
@@ -431,7 +464,7 @@ If you liked this project:
 Give it a ⭐ star on GitHub
 
 And save future roommates from chaos.
-
+---
 😂 Final Roast
 
 If your room still smells after installing this app... technology has limits.
