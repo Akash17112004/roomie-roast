@@ -265,9 +265,10 @@ Provider State Management Layer
 Instant UI Sync Across All Members
       ↓
 Analytics Dashboard + Charts + Roast Engine
----
+
 ```
 ## 📂 Project Structure
+```text
 lib/
 │
 ├── app.dart                 # Main app entry + theme config
@@ -296,7 +297,7 @@ lib/
 │
 ├── widgets/
 └── theme/
----
+```
 
 ## 🔥 Firebase Collections
 users/
