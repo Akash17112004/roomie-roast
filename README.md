@@ -303,7 +303,7 @@ Provider State Management
 Real-time UI Updates
    ↓
 Charts + Roast Messages + Rankings
-```
+---
 📂 Project Structure
 lib/
 │
@@ -333,8 +333,8 @@ lib/
 │
 ├── widgets/
 └── theme/
----
-🔥 Firebase Collections
+```
+# 🔥 Firebase Collections
 users/
 rooms/
 tasks/
@@ -343,7 +343,7 @@ complaints/
 borrowed/
 scores/
 ---
-📸 Screenshots
+# 📸 Screenshots
 Authentication
 <img width="1364" height="631" alt="Screenshot 2026-05-03 235202" src="https://github.com/user-attachments/assets/78ed1942-e2fc-4890-a6f6-79afc32a5c80" />
 
@@ -362,8 +362,6 @@ Roast Banner
 Charts
 <img width="1365" height="420" alt="Screenshot 2026-05-03 235915" src="https://github.com/user-attachments/assets/94bc9520-b93e-4e1e-9ee8-4c46e1372ffb" />
 <img width="1365" height="623" alt="Screenshot 2026-05-04 000007" src="https://github.com/user-attachments/assets/b4a73068-02b0-41aa-9b5e-471bf4a5f2a2" />
-
-
 
 Mood Meter
 <img width="1363" height="189" alt="Screenshot 2026-05-03 235559" src="https://github.com/user-attachments/assets/1f75cd7f-5ca7-481f-88d5-c06f1124be16" />
@@ -389,12 +387,8 @@ Fairness Engine
 Rankings
 <img width="1365" height="631" alt="Screenshot 2026-05-03 235647" src="https://github.com/user-attachments/assets/bb8c3a80-704a-46ad-bacb-0a67db95689f" />
 
-Weekly Duties
-
-
-(Add screenshots in assets folder)
 ---
-⚙️ Installation Guide
+# ⚙️ Installation Guide
 1️⃣ Clone Repository
 git clone https://github.com/Akash17112004/roomie-roast.git
 cd roomie-roast
@@ -409,7 +403,7 @@ GoogleService-Info.plist (iOS)
 4️⃣ Run App
 flutter run
 ---
-🧪 Testing Completed
+# 🧪 Testing Completed
 
 ✅ Login / Signup
 ✅ Room Join/Create
@@ -422,7 +416,7 @@ flutter run
 ✅ Empty States
 ✅ Error Handling
 ---
-🎯 Why This Project Stands Out
+# 🎯 Why This Project Stands Out
 
 Unlike basic student CRUD apps, Roomie Roast combines:
 
@@ -440,7 +434,7 @@ Social interactions
 Design Value
 Premium UI
 ---
-🚀 Future Improvements
+# 🚀 Future Improvements
 AI Chatbot mediator 🤖
 Voice complaints 🎤
 OCR bill scanner 📷
@@ -449,7 +443,7 @@ Leaderboard history
 Monthly reports
 Multi-language support
 ---
-👨‍💻 Developer
+# 👨‍💻 Developer
 Akash Tomar
 
 B.Tech CSE (Full Stack Development)
@@ -457,7 +451,7 @@ The NorthCap University
 
 GitHub: https://github.com/Akash17112004
 ---
-⭐ Support
+# ⭐ Support
 
 If you liked this project:
 
@@ -465,6 +459,6 @@ Give it a ⭐ star on GitHub
 
 And save future roommates from chaos.
 ---
-😂 Final Roast
+# 😂 Final Roast
 
 If your room still smells after installing this app... technology has limits.
