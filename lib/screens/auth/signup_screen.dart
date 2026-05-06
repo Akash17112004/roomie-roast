@@ -7,242 +7,166 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/auth_provider.dart';
 
-class SignupScreen
-    extends StatefulWidget {
-  const SignupScreen(
-      {super.key});
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
 
   @override
-  State<SignupScreen>
-      createState() =>
-          _SignupScreenState();
+  State<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _SignupScreenState
-    extends State<
-        SignupScreen> {
-  final email =
-      TextEditingController();
+class _SignupScreenState extends State<SignupScreen> {
+  final email = TextEditingController();
 
-  final password =
-      TextEditingController();
+  final name = TextEditingController();
+
+  final password = TextEditingController();
 
   bool hidePassword = true;
 
   @override
   Widget build(BuildContext context) {
-    final auth =
-        Provider.of<AuthProvider>(
+    final auth = Provider.of<AuthProvider>(
       context,
     );
 
     return Scaffold(
       body: Container(
-        decoration:
-            const BoxDecoration(
-          gradient:
-              LinearGradient(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
             colors: [
               Color(0xff00c896),
               Color(0xff00b4d8),
               Color(0xff0077b6),
             ],
-            begin:
-                Alignment.topLeft,
-            end: Alignment
-                .bottomRight,
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
         ),
         child: Center(
-          child:
-              SingleChildScrollView(
-            padding:
-                const EdgeInsets.all(
-                    20),
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(20),
             child: Container(
-              padding:
-                  const EdgeInsets.all(
-                      22),
-              decoration:
-                  BoxDecoration(
-                color: Colors.white
-                    .withOpacity(
-                        0.12),
-                borderRadius:
-                    BorderRadius
-                        .circular(
-                            28),
+              padding: const EdgeInsets.all(22),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.12),
+                borderRadius: BorderRadius.circular(28),
               ),
               child: Column(
                 children: [
                   const Icon(
                     Icons.person_add,
                     size: 72,
-                    color:
-                        Colors.white,
+                    color: Colors.white,
                   ),
-
-                  const SizedBox(
-                      height: 12),
-
+                  const SizedBox(height: 12),
                   const Text(
                     "Create Account",
-                    style:
-                        TextStyle(
+                    style: TextStyle(
                       fontSize: 28,
-                      color: Colors
-                          .white,
-                      fontWeight:
-                          FontWeight
-                              .bold,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-
-                  const SizedBox(
-                      height: 24),
-
+                  const SizedBox(height: 24),
                   TextField(
-                    controller:
-                        email,
-                    style:
-                        const TextStyle(
-                      color: Colors
-                          .white,
+                    controller: name,
+                    textCapitalization: TextCapitalization.words,
+                    style: const TextStyle(
+                      color: Colors.white,
                     ),
-                    decoration:
-                        input(
+                    decoration: input(
+                      "Your name",
+                      Icons.person,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  TextField(
+                    controller: email,
+                    style: const TextStyle(
+                      color: Colors.white,
+                    ),
+                    decoration: input(
                       "Email",
                       Icons.email,
                     ),
                   ),
-
-                  const SizedBox(
-                      height: 16),
-
+                  const SizedBox(height: 16),
                   TextField(
-                    controller:
-                        password,
-                    obscureText:
-                        hidePassword,
-                    style:
-                        const TextStyle(
-                      color: Colors
-                          .white,
+                    controller: password,
+                    obscureText: hidePassword,
+                    style: const TextStyle(
+                      color: Colors.white,
                     ),
-                    decoration:
-                        input(
+                    decoration: input(
                       "Password",
                       Icons.lock,
                     ).copyWith(
-                      suffixIcon:
-                          IconButton(
+                      suffixIcon: IconButton(
                         icon: Icon(
                           hidePassword
-                              ? Icons
-                                  .visibility_off
-                              : Icons
-                                  .visibility,
-                          color: Colors
-                              .white70,
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: Colors.white70,
                         ),
-                        onPressed:
-                            () {
-                          setState(
-                              () {
-                            hidePassword =
-                                !hidePassword;
+                        onPressed: () {
+                          setState(() {
+                            hidePassword = !hidePassword;
                           });
                         },
                       ),
                     ),
                   ),
-
-                  const SizedBox(
-                      height: 22),
-
+                  const SizedBox(height: 22),
                   SizedBox(
-                    width: double
-                        .infinity,
+                    width: double.infinity,
                     height: 54,
-                    child:
-                        ElevatedButton(
-                      style:
-                          ElevatedButton.styleFrom(
-                        backgroundColor:
-                            Colors.white,
-                        foregroundColor:
-                            const Color(
-                                0xff00c896),
-                        shape:
-                            RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.circular(
-                                  16),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        foregroundColor: const Color(0xff00c896),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
                         ),
                       ),
-                      onPressed:
-                          () async {
-                        final msg =
-                            await auth
-                                .signUp(
-                          email: email
-                              .text
-                              .trim(),
-                          password:
-                              password
-                                  .text
-                                  .trim(),
+                      onPressed: () async {
+                        final msg = await auth.signUp(
+                          name: name.text.trim(),
+                          email: email.text.trim(),
+                          password: password.text.trim(),
                         );
 
-                        if (!mounted)
-                          return;
+                        if (!mounted) return;
 
-                        if (msg ==
-                            null) {
+                        if (msg == null) {
                           Navigator.pushReplacementNamed(
-                              context,
-                              '/room-setup');
+                              context, '/room-setup');
                         } else {
-                          ScaffoldMessenger.of(
-                                  context)
-                              .showSnackBar(
+                          ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              content:
-                                  Text(
-                                      msg),
+                              content: Text(msg),
                             ),
                           );
                         }
                       },
-                      child: auth
-                              .isLoading
+                      child: auth.isLoading
                           ? const CircularProgressIndicator()
                           : const Text(
                               "Sign Up",
-                              style:
-                                  TextStyle(
-                                fontWeight:
-                                    FontWeight.bold,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                     ),
                   ),
-
-                  const SizedBox(
-                      height: 10),
-
+                  const SizedBox(height: 10),
                   TextButton(
                     onPressed: () {
-                      Navigator.pop(
-                          context);
+                      Navigator.pop(context);
                     },
-                    child:
-                        const Text(
+                    child: const Text(
                       "Already have account?",
-                      style:
-                          TextStyle(
-                        color: Colors
-                            .white,
+                      style: TextStyle(
+                        color: Colors.white,
                       ),
                     ),
                   )
@@ -261,24 +185,15 @@ class _SignupScreenState
   ) {
     return InputDecoration(
       hintText: hint,
-      hintStyle:
-          const TextStyle(
+      hintStyle: const TextStyle(
         color: Colors.white70,
       ),
-      prefixIcon:
-          Icon(icon,
-              color:
-                  Colors.white),
+      prefixIcon: Icon(icon, color: Colors.white),
       filled: true,
-      fillColor:
-          Colors.white12,
-      border:
-          OutlineInputBorder(
-        borderRadius:
-            BorderRadius
-                .circular(16),
-        borderSide:
-            BorderSide.none,
+      fillColor: Colors.white12,
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide.none,
       ),
     );
   }

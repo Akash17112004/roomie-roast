@@ -2,18 +2,27 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class ExpenseProvider extends ChangeNotifier {
-  final FirebaseFirestore _firestore =
-      FirebaseFirestore.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   String roomId = "";
+  Stream<QuerySnapshot>? _expensesStream;
 
   void setRoom(String id) {
+    if (roomId == id) {
+      return;
+    }
+
     roomId = id;
+    _expensesStream = null;
     notifyListeners();
   }
 
   Stream<QuerySnapshot> getExpenses() {
-    return _firestore
+    if (roomId.isEmpty) {
+      return const Stream.empty();
+    }
+
+    return _expensesStream ??= _firestore
         .collection('rooms')
         .doc(roomId)
         .collection('expenses')
@@ -36,20 +45,15 @@ class ExpenseProvider extends ChangeNotifier {
         .doc()
         .id;
 
-    final members =
-        await _firestore
-            .collection('rooms')
-            .doc(roomId)
-            .collection('members')
-            .get();
+    final members = await _firestore
+        .collection('rooms')
+        .doc(roomId)
+        .collection('members')
+        .get();
 
-    final totalMembers =
-        members.docs.length == 0
-            ? 1
-            : members.docs.length;
+    final totalMembers = members.docs.isEmpty ? 1 : members.docs.length;
 
-    final splitAmount =
-        amount / totalMembers;
+    final splitAmount = amount / totalMembers;
 
     await _firestore
         .collection('rooms')
@@ -62,10 +66,24 @@ class ExpenseProvider extends ChangeNotifier {
       'amount': amount,
       'paidBy': paidBy,
       'members': totalMembers,
-      'splitAmount':
-          splitAmount,
-      'createdAt':
-          Timestamp.now(),
+      'splitAmount': splitAmount,
+      'isReturned': false,
+      'createdAt': Timestamp.now(),
+    });
+  }
+
+  Future<void> setExpenseReturned({
+    required String expenseId,
+    required bool returned,
+  }) async {
+    await _firestore
+        .collection('rooms')
+        .doc(roomId)
+        .collection('expenses')
+        .doc(expenseId)
+        .update({
+      'isReturned': returned,
+      'returnedAt': returned ? Timestamp.now() : null,
     });
   }
 

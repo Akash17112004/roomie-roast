@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-class DutyProvider
-    extends ChangeNotifier {
+class DutyProvider extends ChangeNotifier {
   final List<String> members = [
     "Akash",
     "Arpit",
@@ -10,10 +9,10 @@ class DutyProvider
   ];
 
   final List<String> duties = [
-    "Dishes 🍽️",
-    "Trash 🗑️",
-    "Sweeping 🧹",
-    "Bathroom 🚿",
+    "Dishes",
+    "Trash",
+    "Sweeping",
+    "Bathroom",
   ];
 
   int week = 0;
@@ -23,20 +22,13 @@ class DutyProvider
     notifyListeners();
   }
 
-  List<Map<String, String>>
-      assignments() {
-    List<Map<String, String>>
-        result = [];
+  List<Map<String, String>> assignments() {
+    final result = <Map<String, String>>[];
 
-    for (int i = 0;
-        i < duties.length;
-        i++) {
+    for (int i = 0; i < duties.length; i++) {
       result.add({
-        "member": members[
-            (i + week) %
-                members.length],
-        "duty":
-            duties[i],
+        "member": members[(i + week) % members.length],
+        "duty": duties[i],
       });
     }
 

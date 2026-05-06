@@ -1,16 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class StreakProvider
-    extends ChangeNotifier {
+class StreakProvider extends ChangeNotifier {
+  static const _streakKey = 'streak';
+
   int streak = 0;
 
-  void completedTask() {
-    streak++;
+  StreakProvider() {
+    _load();
+  }
+
+  Future<void> _load() async {
+    final prefs = await SharedPreferences.getInstance();
+    streak = prefs.getInt(_streakKey) ?? 0;
     notifyListeners();
   }
 
-  void reset() {
+  Future<void> completedTask() async {
+    streak++;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(_streakKey, streak);
+    notifyListeners();
+  }
+
+  Future<void> reset() async {
     streak = 0;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(_streakKey, streak);
     notifyListeners();
   }
 

@@ -30,6 +30,8 @@ dependencies:
   timezone: ^0.9.4
   google_fonts: ^8.1.0
   share_plus: ^13.1.0
+  http: ^1.6.0
+  flutter_tts: ^4.2.3
 dev_dependencies:
   flutter_test:
     sdk: flutter

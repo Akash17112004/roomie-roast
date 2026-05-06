@@ -6,28 +6,33 @@ class TaskProvider extends ChangeNotifier {
 
   String roomId = "";
   bool isLoading = false;
+  Stream<QuerySnapshot>? _tasksStream;
 
   void setRoom(String id) {
+    if (roomId == id) {
+      return;
+    }
+
     roomId = id;
+    _tasksStream = null;
     notifyListeners();
   }
 
   Stream<QuerySnapshot> getTasks() {
-    return _firestore
+    if (roomId.isEmpty) {
+      return const Stream.empty();
+    }
+
+    return _tasksStream ??= _firestore
         .collection('rooms')
         .doc(roomId)
         .collection('tasks')
-        .orderBy('createdAt', descending: true)
         .snapshots();
   }
 
   Future<void> addTask(String title) async {
-    final taskId = _firestore
-        .collection('rooms')
-        .doc(roomId)
-        .collection('tasks')
-        .doc()
-        .id;
+    final taskId =
+        _firestore.collection('rooms').doc(roomId).collection('tasks').doc().id;
 
     await _firestore
         .collection('rooms')
@@ -36,6 +41,7 @@ class TaskProvider extends ChangeNotifier {
         .doc(taskId)
         .set({
       'taskId': taskId,
+      'roomId': roomId,
       'title': title,
       'status': 'pending',
       'assignedTo': 'Anyone',

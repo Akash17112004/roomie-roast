@@ -1,31 +1,31 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class SocialProvider
-    extends ChangeNotifier {
-  final FirebaseFirestore _firestore =
-      FirebaseFirestore.instance;
+class SocialProvider extends ChangeNotifier {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   String roomId = "";
+  Stream<QuerySnapshot>? _complaintsStream;
+  Stream<QuerySnapshot>? _borrowedStream;
 
   void setRoom(String id) {
     if (roomId == id) return;
 
     roomId = id;
+    _complaintsStream = null;
+    _borrowedStream = null;
     notifyListeners();
   }
 
-  Stream<QuerySnapshot>
-      getComplaints() {
+  Stream<QuerySnapshot> getComplaints() {
     if (roomId.isEmpty) {
       return const Stream.empty();
     }
 
-    return _firestore
+    return _complaintsStream ??= _firestore
         .collection('rooms')
         .doc(roomId)
-        .collection(
-            'complaints')
+        .collection('complaints')
         .orderBy(
           'createdAt',
           descending: true,
@@ -36,45 +36,39 @@ class SocialProvider
   Future<void> addComplaint(
     String text,
   ) async {
-    if (roomId.isEmpty ||
-        text.trim().isEmpty) {
+    if (roomId.isEmpty || text.trim().isEmpty) {
       return;
     }
 
     final id = _firestore
         .collection('rooms')
         .doc(roomId)
-        .collection(
-            'complaints')
+        .collection('complaints')
         .doc()
         .id;
 
     await _firestore
         .collection('rooms')
         .doc(roomId)
-        .collection(
-            'complaints')
+        .collection('complaints')
         .doc(id)
         .set({
       'id': id,
       'text': text.trim(),
       'resolved': false,
-      'createdAt':
-          Timestamp.now(),
+      'createdAt': Timestamp.now(),
     });
   }
 
-  Stream<QuerySnapshot>
-      getBorrowed() {
+  Stream<QuerySnapshot> getBorrowed() {
     if (roomId.isEmpty) {
       return const Stream.empty();
     }
 
-    return _firestore
+    return _borrowedStream ??= _firestore
         .collection('rooms')
         .doc(roomId)
-        .collection(
-            'borrowed')
+        .collection('borrowed')
         .orderBy(
           'createdAt',
           descending: true,
@@ -86,37 +80,31 @@ class SocialProvider
     String item,
     String by,
   ) async {
-    if (roomId.isEmpty ||
-        item.trim().isEmpty ||
-        by.trim().isEmpty) {
+    if (roomId.isEmpty || item.trim().isEmpty || by.trim().isEmpty) {
       return;
     }
 
     final id = _firestore
         .collection('rooms')
         .doc(roomId)
-        .collection(
-            'borrowed')
+        .collection('borrowed')
         .doc()
         .id;
 
     await _firestore
         .collection('rooms')
         .doc(roomId)
-        .collection(
-            'borrowed')
+        .collection('borrowed')
         .doc(id)
         .set({
       'id': id,
       'item': item.trim(),
       'by': by.trim(),
-      'createdAt':
-          Timestamp.now(),
+      'createdAt': Timestamp.now(),
     });
   }
 
-  final List<String>
-      punishments = [
+  final List<String> punishments = [
     "Buy snacks for everyone 🍟",
     "Wash dishes today 🍽️",
     "Make chai for all ☕",

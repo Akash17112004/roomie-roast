@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/analytics_provider.dart';
+import '../../widgets/speak_button.dart';
 
 class LeaderboardScreen extends StatelessWidget {
   const LeaderboardScreen({super.key});
@@ -20,24 +21,33 @@ class LeaderboardScreen extends StatelessWidget {
   }
 
   String roastLine(int i) {
-    if (i == 0) return "Runs the room like royalty 👑";
-    if (i == 1) return "Very dangerous competitor ⚡";
-    if (i == 2) return "Climbing faster than rent 📈";
-    return "Still cooking greatness 🍳";
+    if (i == 0) return "Runs the room like royalty ??";
+    if (i == 1) return "Very dangerous competitor ?";
+    if (i == 2) return "Climbing faster than rent ??";
+    return "Still cooking greatness ??";
   }
 
   @override
   Widget build(BuildContext context) {
-    final provider =
-        Provider.of<AnalyticsProvider>(context);
+    final provider = Provider.of<AnalyticsProvider>(context);
 
     final data = provider.leaderboard();
 
     return Scaffold(
       appBar: AppBar(
         title: const Text("Hall of Flatmates"),
+        actions: [
+          if (data.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: SpeakButton(
+                text:
+                    "${data.first["name"]} is leading with ${data.first["score"]} points.",
+                tooltip: "Speak leaderboard summary",
+              ),
+            ),
+        ],
       ),
-
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -50,25 +60,19 @@ class LeaderboardScreen extends StatelessWidget {
             end: Alignment.bottomCenter,
           ),
         ),
-
         child: Column(
           children: [
             const SizedBox(height: 16),
 
             /// HEADER CARD
             Container(
-              margin:
-                  const EdgeInsets.symmetric(
+              margin: const EdgeInsets.symmetric(
                 horizontal: 16,
               ),
-              padding:
-                  const EdgeInsets.all(18),
+              padding: const EdgeInsets.all(18),
               decoration: BoxDecoration(
-                borderRadius:
-                    BorderRadius.circular(
-                        24),
-                gradient:
-                    const LinearGradient(
+                borderRadius: BorderRadius.circular(24),
+                gradient: const LinearGradient(
                   colors: [
                     Color(0xff7b61ff),
                     Color(0xff9b8cff),
@@ -76,11 +80,9 @@ class LeaderboardScreen extends StatelessWidget {
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.deepPurple
-                        .withOpacity(.18),
+                    color: Colors.deepPurple.withOpacity(.18),
                     blurRadius: 18,
-                    offset:
-                        const Offset(0, 8),
+                    offset: const Offset(0, 8),
                   )
                 ],
               ),
@@ -94,12 +96,11 @@ class LeaderboardScreen extends StatelessWidget {
                   SizedBox(width: 14),
                   Expanded(
                     child: Text(
-                      "Room Legends Board 🏆",
+                      "Room Legends Board ??",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 22,
-                        fontWeight:
-                            FontWeight.bold,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   )
@@ -111,131 +112,84 @@ class LeaderboardScreen extends StatelessWidget {
 
             Expanded(
               child: ListView.builder(
-                padding:
-                    const EdgeInsets.all(14),
+                padding: const EdgeInsets.all(14),
                 itemCount: data.length,
                 itemBuilder: (_, i) {
                   final user = data[i];
 
                   return Container(
-                    margin:
-                        const EdgeInsets.only(
+                    margin: const EdgeInsets.only(
                       bottom: 14,
                     ),
-                    decoration:
-                        BoxDecoration(
-                      borderRadius:
-                          BorderRadius
-                              .circular(
-                                  22),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(22),
                       color: Colors.white,
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black
-                              .withOpacity(
-                                  .05),
+                          color: Colors.black.withOpacity(.05),
                           blurRadius: 12,
-                          offset:
-                              const Offset(
-                                  0, 6),
+                          offset: const Offset(0, 6),
                         )
                       ],
                     ),
-
                     child: ListTile(
-                      contentPadding:
-                          const EdgeInsets
-                              .all(14),
-
+                      contentPadding: const EdgeInsets.all(14),
                       leading: CircleAvatar(
                         radius: 28,
-                        backgroundColor:
-                            rankColor(i)
-                                .withOpacity(
-                                    .15),
+                        backgroundColor: rankColor(i).withOpacity(.15),
                         child: Icon(
                           rankIcon(i),
-                          color:
-                              rankColor(i),
+                          color: rankColor(i),
                           size: 28,
                         ),
                       ),
-
                       title: Row(
                         children: [
                           Text(
                             "#${i + 1}",
-                            style:
-                                TextStyle(
-                              color:
-                                  rankColor(
-                                      i),
-                              fontWeight:
-                                  FontWeight
-                                      .bold,
+                            style: TextStyle(
+                              color: rankColor(i),
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const SizedBox(
-                              width: 10),
+                          const SizedBox(width: 10),
                           Expanded(
                             child: Text(
                               user["name"],
-                              style:
-                                  const TextStyle(
+                              style: const TextStyle(
                                 fontSize: 18,
-                                fontWeight:
-                                    FontWeight
-                                        .bold,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
                         ],
                       ),
-
                       subtitle: Padding(
-                        padding:
-                            const EdgeInsets
-                                .only(
+                        padding: const EdgeInsets.only(
                           top: 8,
                         ),
                         child: Text(
                           roastLine(i),
-                          style:
-                              TextStyle(
-                            color: Colors
-                                .grey
-                                .shade700,
+                          style: TextStyle(
+                            color: Colors.grey.shade700,
                           ),
                         ),
                       ),
-
                       trailing: Container(
-                        padding:
-                            const EdgeInsets
-                                .symmetric(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: 14,
                           vertical: 10,
                         ),
-                        decoration:
-                            BoxDecoration(
-                          borderRadius:
-                              BorderRadius
-                                  .circular(
-                                      16),
-                          color: rankColor(i)
-                              .withOpacity(
-                                  .12),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          color: rankColor(i).withOpacity(.12),
                         ),
                         child: Text(
                           "${user["score"]}",
-                          style:
-                              TextStyle(
-                            fontWeight:
-                                FontWeight
-                                    .bold,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
                             fontSize: 16,
-                            color:
-                                rankColor(i),
+                            color: rankColor(i),
                           ),
                         ),
                       ),
