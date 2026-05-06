@@ -3,7 +3,7 @@
 > **Smart Flatmate & Hostel Life Manager**
 > An all-in-one productivity + social coordination app built for students living in **hostels, flats, PGs, or shared rooms**.
 
-Roomie Roast helps roommates manage chores, split expenses, assign duties, resolve conflicts, and stay accountable... with a hilarious twist of roast messages.
+Roomie Roast helps roommates manage chores, split expenses, assign duties, resolve conflicts, and stay accountable... with a hilarious twist of roast messages + AI Insights with voice assistant.
 
 Built using **Flutter + Firebase + Provider + Charts + Custom Logic Systems**
 
@@ -32,6 +32,8 @@ A smart roommate management app that solves these everyday problems using:
 - Analytics dashboard
 - Roast notifications
 - Premium modern UI
+- AI Insights
+- Voice Descriptions
 
 ---
 
@@ -109,7 +111,7 @@ Members can rate room mood:
 - 😐 Normal
 - 😎 Chill
 
-**📌 Smart Insights**
+**📌 AI Smart Insights**
 
 Examples:
 - "High spending week. Snacks are winning."
@@ -368,6 +370,13 @@ scores/
 **Rankings**
 
 <img width="1365" height="631" alt="Screenshot 2026-05-03 235647" src="https://github.com/user-attachments/assets/bb8c3a80-704a-46ad-bacb-0a67db95689f" />
+
+**Dark Theme Toggle**
+<img width="1365" height="627" alt="image" src="https://github.com/user-attachments/assets/c379b0ea-61ed-4e3b-a7b6-82927a5fbb4f" />
+
+**AI Insights with Voice Feature**
+<img width="1365" height="622" alt="Screenshot 2026-05-07 011135" src="https://github.com/user-attachments/assets/33d123cd-d820-4592-9a4d-a91ad01784fc" />
+
 
 ---
 
