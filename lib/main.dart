@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'app.dart';
 import 'firebase_options.dart';
 import 'services/notification_service.dart';
+import 'services/offline_sync_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,5 +13,6 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await NotificationService.init();
+  await OfflineSyncService.instance.init();
   runApp(const RoomieRoastApp());
 }

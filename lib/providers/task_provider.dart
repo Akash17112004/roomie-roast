@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import '../services/offline_sync_service.dart';
 
 class TaskProvider extends ChangeNotifier {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -31,32 +32,28 @@ class TaskProvider extends ChangeNotifier {
   }
 
   Future<void> addTask(String title) async {
+    if (roomId.isEmpty || title.trim().isEmpty) {
+      return;
+    }
+
     final taskId =
         _firestore.collection('rooms').doc(roomId).collection('tasks').doc().id;
 
-    await _firestore
-        .collection('rooms')
-        .doc(roomId)
-        .collection('tasks')
-        .doc(taskId)
-        .set({
-      'taskId': taskId,
-      'roomId': roomId,
-      'title': title,
-      'status': 'pending',
-      'assignedTo': 'Anyone',
-      'createdAt': Timestamp.now(),
-    });
+    await OfflineSyncService.instance.addTask(
+      roomId: roomId,
+      taskId: taskId,
+      title: title.trim(),
+    );
   }
 
   Future<void> markDone(String taskId) async {
-    await _firestore
-        .collection('rooms')
-        .doc(roomId)
-        .collection('tasks')
-        .doc(taskId)
-        .update({
-      'status': 'done',
-    });
+    if (roomId.isEmpty || taskId.trim().isEmpty) {
+      return;
+    }
+
+    await OfflineSyncService.instance.markTaskDone(
+      roomId: roomId,
+      taskId: taskId.trim(),
+    );
   }
 }
