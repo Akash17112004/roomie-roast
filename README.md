@@ -269,6 +269,23 @@ Instant UI Sync Across All Members
 Analytics Dashboard + Charts + Roast Engine
 
 ```
+
+### Architecture Diagram
+```mermaid
+graph TD
+    A[User Interface] --> B[Provider Layer]
+    B --> C[Firebase Auth]
+    B --> D[Firestore]
+    B --> E[Local Storage]
+    D --> F[Offline Sync Queue]
+    B --> G[Custom Services]
+    G --> H[Roast Engine]
+    G --> I[Fairness Engine]
+    G --> J[Notification Service]
+    A --> K[Charts & Analytics]
+    K --> L[Data Visualization]
+```
+
 ## 📂 Project Structure
 ```text
 lib/
@@ -437,7 +454,37 @@ Unlike basic student CRUD apps, Roomie Roast combines:
 
 ---
 
-## 🚀 Future Improvements
+## 🤖 AI Usage Disclosure
+
+This project was developed with minimal AI assistance to ensure originality and custom implementation:
+
+- **No AI code generation**: All Flutter/Dart code, UI components, and logic systems were written manually.
+- **No AI design**: UI/UX themes, color schemes, and layouts were designed independently.
+- **Roast Engine**: Custom humor logic and message generation implemented from scratch.
+- **Fairness Scoring**: Algorithm developed manually based on behavioral psychology concepts.
+- **Tools Used**: 
+  - GitHub Copilot: Used only for minor code suggestions (e.g., syntax corrections, import statements) - all logic and architecture decisions were manual.
+  - ChatGPT: Used for brainstorming feature ideas and README writing assistance - all implementations were custom-coded.
+- **Manual Modifications**: 100% of the codebase was written, reviewed, and modified by human developers. AI suggestions were evaluated and adapted, not directly copied.
+
+---
+
+## �️ Challenges Faced & Solutions
+
+- **Real-time Sync Complexity**: Implementing offline-first architecture with Firestore required careful queue management and conflict resolution.
+  - Solution: Custom OfflineSyncService with action queuing and connectivity monitoring.
+- **State Management Coordination**: Coordinating multiple providers (tasks, expenses, fairness) across screens.
+  - Solution: Centralized provider pattern with clear separation of concerns.
+- **Custom Logic Implementation**: Building non-trivial systems like fairness scoring and roast generation.
+  - Solution: Manual algorithm design based on user behavior patterns.
+- **UI Responsiveness**: Ensuring layouts work across different screen sizes.
+  - Solution: Custom responsive helpers and flexible widget structures.
+- **Performance Optimization**: Preventing UI lag with multiple charts and real-time updates.
+  - Solution: Efficient provider notifications and optimized rebuilds.
+
+---
+
+## �🚀 Future Improvements
 
 - AI Chatbot mediator 🤖
 - Voice complaints 🎤
